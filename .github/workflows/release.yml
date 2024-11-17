@@ -1,8 +1,9 @@
-name: Build and Release JAR
+name: Build and Release Jar
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*' # Trigger workflow when a tag starting with "v" is pushed (e.g., v1.0.0)
 
 jobs:
   build-and-release:
@@ -25,6 +26,6 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: target/ProtocolSwitchingFileIO-1.0.0.jar # Adjust based on your JAR name
+        asset_path: target/ProtocolSwitchingFileIO-1.0.0.jar
         asset_name: ProtocolSwitchingFileIO.jar
         asset_content_type: application/java-archive
