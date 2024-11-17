@@ -34,7 +34,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      # Create a new release
+      # Create GitHub Release
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -46,6 +46,7 @@ jobs:
             - Automatically generated JAR for release ${{ github.ref_name }}
           draft: false
           prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }} # Pass the GITHUB_TOKEN here
 
       # Upload the built JAR to GitHub Release
       - name: Upload Jar to GitHub Release
