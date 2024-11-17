@@ -22,3 +22,46 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+.DS_Store
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Maven directories
+target/
+
+# Eclipse specific files
+.settings/
+.classpath
+.project
+
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+out/
+
+# VS Code specific files
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Build tools
+.mvn/
+
+# Ignore Maven wrapper files
+!/.mvn/wrapper/maven-wrapper.jar
+
+# Exclude sensitive configuration files (if any)
+*.env
