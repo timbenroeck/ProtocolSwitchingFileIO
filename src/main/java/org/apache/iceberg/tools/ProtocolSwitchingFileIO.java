@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class ProtocolSwitchingFileIO implements FileIO {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProtocolSwitchingFileIO.class);
-    private static final String VERSION = "1.0.0";
+    private static final String VERSION = "1.1.0";
     private static final String DELEGATE_FILE_IO_CLASS = "io-impl-delegate";
 
     private FileIO delegateFileIO;
