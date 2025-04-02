@@ -51,7 +51,29 @@ public class ProtocolSwitchingFileIO implements FileIO {
                 throw new IllegalArgumentException("Class " + delegateClassName + " does not implement FileIO.");
             }
             delegateFileIO = (FileIO) clazz.getDeclaredConstructor().newInstance();
-            delegateFileIO.initialize(properties);
+
+            Map<String, String> mutableProps = new HashMap<>(properties);
+
+            for (Map.Entry<String, String> entry : properties.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+
+                // Check conditions
+                if (key.startsWith("adls.sas-token")
+                        && !key.endsWith(".blob.core.windows.net")
+                        && !key.endsWith(".dfs.core.windows.net")) {
+
+                    String newKey = key + ".blob.core.windows.net";
+
+                    // Avoid overwriting existing keys
+                    if (!mutableProps.containsKey(newKey)) {
+                        mutableProps.put(newKey, value);
+                        LOG.info("Added derived property: {} -> {}", newKey, value);
+                    }
+                }
+            }
+
+            delegateFileIO.initialize(mutableProps);
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize delegate FileIO: " + delegateClassName, e);
         }
